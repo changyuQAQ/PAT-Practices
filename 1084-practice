@@ -1,0 +1,16 @@
+int main()
+{
+	int n1;  string s, temp;  cin >> s >> n1;
+	for (int i = 0; i < n1-1; i++)
+	{
+		for (int j = 0; j < s.size(); j++)
+		{	
+			int t = 1;
+			while (s[j] == s[j + 1])j++, t++;
+			temp += s[j] + to_string(t); t = 1;
+		}
+		s = temp; temp.clear();
+	}
+	cout << s;
+}
+//想通过map[]++实现统计，之后学习了经典的写法通过s[i]==s[i+1]来进行字符的压缩统计
