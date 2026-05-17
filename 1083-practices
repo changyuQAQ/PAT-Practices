@@ -1,0 +1,9 @@
+int a[10005];
+int main()
+{
+	int n1; cin >> n1; 
+	int num; 
+	for (int i = 1; i <= n1; i++)cin >> num, a[abs(num - i)]++;
+	for (int i = 10004; i >= 0; i--)if (a[i]&&a[i]!=1)cout << i << " " << a[i] << endl;
+}
+//数据量足够小直接循环判断输出
