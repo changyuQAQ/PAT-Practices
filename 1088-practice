@@ -1,0 +1,22 @@
+int main()
+{ 
+	int a, b, c; cin >> a >> b >> c;
+	int index = 0; int a1=0, b1=0, c1=0;
+	for (int i = 99; i >=10; i--)
+	{
+		int num = i; 
+		int snum = num / 10 + (num % 10) * 10;
+		if (snum % c != 0)continue;
+		if (abs(num - snum) * c == b * snum)
+		{
+			a1 = i, b1 = snum, c1 = snum / c;
+			cout << a1
+				<< " " << (a1 > a ? "Cong" : (a1 == a ? "Ping" : "Gai"))
+				<< " " << (b1 > a ? "Cong" : (b1 == a ? "Ping" : "Gai"))
+				<< " " << (c1 > a ? "Cong" : (c1 == a ? "Ping" : "Gai"))<<endl;
+			return 0;
+		}
+	}
+	cout << "No Solution" << endl;
+}
+//c1的值未规定为整数卡了我很久，倒序循环直接输出最大值退出程序，使用3元运算输出大小关系
