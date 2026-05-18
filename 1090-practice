@@ -1,0 +1,68 @@
+int main()
+{
+	int n, m; cin >> n >> m;
+	map<int, set<int>>m1; int a, b;
+	for (int i = 0; i < n; i++)cin >> a >> b,m1[a].insert(b), m1[b].insert(a);
+	for (int i = 0; i < m; i++)
+	{
+		int num1; bool f1 = false;
+		int n1; cin >> n1; set<int>vs1;
+		for (int j = 0; j < n1; j++)
+		{
+			cin >> num1; vs1.insert(num1);
+		}
+		for (int x : vs1) {                      
+			for (int y : m1[x]) {                
+				if (vs1.find(y) != vs1.end()) {  
+					f1 = true;
+					break;
+				}
+			}
+		}
+		if (f1)cout << "N0" << endl;
+		else cout << "Yes" << endl;
+	}
+}
+//通过每次的货物通过map<int,set<int>>遍历，有一个不行进行标记，最后输出yes no
+
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n, m; 
+    cin >> n >> m;
+    unordered_map<int, unordered_set<int>> m1;
+    
+    for (int i = 0; i < n; i++) {
+        int a, b; 
+        cin >> a >> b;
+        m1[a].insert(b);
+        m1[b].insert(a);
+    }
+    
+    for (int i = 0; i < m; i++) {
+        int k; 
+        cin >> k;
+        unordered_set<int> goods;
+        for (int j = 0; j < k; j++) {
+            int id; 
+            cin >> id;
+            goods.insert(id);
+        }
+        
+        bool unsafe = false;
+        for (int id : goods) {
+            for (int conflict : m1[id]) {
+                if (goods.count(conflict)) {
+                    unsafe = true;
+                    goto output;
+                }
+            }
+        }
+        
+        output:
+        cout << (unsafe ? "No" : "Yes") << '\n';
+    }
+}
+//可以使用哈希表降低标记货物的复杂度，goto减少遍历量
