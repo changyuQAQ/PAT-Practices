@@ -1,0 +1,12 @@
+
+int main()
+{
+	int n1; cin >> n1;
+	map<int, int>m1;
+	for (int i = 1; i <= n1; i++)
+	{
+		m1[i / 2 + i / 3 + i / 5]++;
+	}
+	cout << m1.size();
+} 
+//使用map.size()统计不同数字
