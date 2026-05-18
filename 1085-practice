@@ -1,0 +1,46 @@
+struct test {
+	int b_sum, a_sum, t_sum;  // 分开存储
+	int num;
+	string id;
+	int total() {
+		return b_sum * 2 / 3 + a_sum + t_sum * 3 / 2;
+	}
+};
+
+bool cmp(pair<string, test>a, pair<string, test>b)
+{
+	if (a.second.total() == b.second.total())
+	{
+		if (a.second.num == b.second.num)return a.second.id < b.second.id;
+		else return a.second.num < b.second.num;
+	}
+	return a.second.total() > b.second.total();
+}
+int main()
+{
+	int n1; cin >> n1; string a, b; int c;
+	map<string, test>m1;
+	for (int i = 0; i < n1; i++)
+	{
+		cin >> a >> c >> b; for (int j = 0; j < b.size(); j++)b[j] = tolower(b[j]);
+		if (a[0] == 'B') m1[b].b_sum += c;
+		if (a[0] == 'A') m1[b].a_sum += c;
+		if (a[0] == 'T') m1[b].t_sum += c;
+		m1[b].num++;
+
+	}
+	vector<pair<string, test>> v1(m1.begin(), m1.end());
+	sort(v1.begin(), v1.end(), cmp);
+	cout << v1.size() << endl;
+	int rank = 1;
+	int last_score = -1;
+	for (int i = 0; i < v1.size(); i++)
+	{
+		if (v1[i].second.total() != last_score) {
+			rank = i + 1;
+			last_score = v1[i].second.total();
+		}
+		cout << rank << " " << v1[i].first << " " << v1[i].second.total() << " " << v1[i].second.num << endl;
+	}
+}
+//将所有队伍名进行小写化避免重复，通过map唯一性统计三个级别分数，放入vector进行排序输出分数
