@@ -1,0 +1,24 @@
+int a[105];
+int main()
+{
+	int n; cin >> n;
+	for (int i = 1; i <= n; i++)cin >> a[i];
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = i+1; j <= n; j++)
+		{
+			vector<int>v1(n + 1, 1),ans;   
+			v1[i] = -1; v1[j] = -1;
+			for (int k = 1; k <= n ; k++)
+			{
+				if (a[k] * v1[abs(a[k])] < 0)ans.push_back(v1[k]);
+			}
+			if(ans.size()==2&& ans[0] + ans[1] == 0)
+			{
+		     	cout << i << " " << j; return 0;
+			}
+		}
+	}
+	cout << "No Solution";
+}
+//使用双重循环暴力枚举，外层从最小开始，所以输出结果时一定为最小，根据题目说谎者不能全为狼人或好人排除错误答案
