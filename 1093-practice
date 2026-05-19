@@ -1,0 +1,12 @@
+int main()
+{
+	string s1, s2; getline(cin, s1); getline(cin, s2);
+	string s3 = s1 + s2;
+	map<char, int>m1;
+	for (int i = 0; i < s3.size(); i++)
+	{
+		if (!m1[s3[i]])cout << s3[i];
+		m1[s3[i]]++;
+	}
+}
+//使用map来查重，输出一次后使value不为零实现判断
