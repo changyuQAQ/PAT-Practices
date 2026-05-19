@@ -1,0 +1,24 @@
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	vector<int>v1(n);
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			int cc; cin >> cc;
+			v1[j] += cc;
+		}
+	}
+	int ma = *max_element(v1.begin(), v1.end());  //使用自带函数快速取最大值
+	//for (int i = 0; i < n; i++) ma = max(ma, v1[i]);  不知道max_element函数采用循环取最大值
+	cout << ma << endl; bool f1 = false;
+	for (int i = 0; i < n; i++)if (v1[i] >= ma)
+	{
+		if (f1) cout << " ";
+		cout << i+1;
+		f1 = true;
+	}
+}
+//将销量进行累加，取max之后从小到大循环，实现并列时从小到大输出产品型号
