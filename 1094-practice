@@ -1,0 +1,26 @@
+bool check(int cc)
+{
+	if (cc < 2)return false;
+	for (int i = 2; i*i <= cc ; i++)
+	{
+		if (cc % i == 0)return false;
+	}
+	return true;
+}
+int main()
+{
+	int n1, n2; cin >> n1 >> n2;
+	cin.ignore();
+	string s; getline(cin, s);
+	for (int i = 0; i+n2 <= s.size(); i++)
+	{
+		string snum = s.substr(i, n2);
+		int num = stoi(snum);
+		if (check(num))
+		{
+			cout << snum; return 0;
+		}
+	}
+	cout << "404";
+}
+//使用substr截断字符，通过stoi转换进行判断，最后输出时包含前置0，所以输出字符串段
