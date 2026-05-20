@@ -1,0 +1,15 @@
+int main()
+{
+	string s1, s, s2;
+	int sale, num1 = -1, nums, ans=-1;
+	int n; cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> s >> sale >> nums;
+		int ans1 = sale * nums;
+		if (nums > num1)s1 = s, num1 = nums;
+		if (ans1 > ans)s2 = s, ans= ans1;
+	}
+	cout << s1 << " " << num1 << endl << s2 << " " << ans;
+}
+//没撒讲的
