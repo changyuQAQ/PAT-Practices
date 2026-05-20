@@ -1,0 +1,11 @@
+int main()
+{
+	string num ;int k; cin >> num >> k;
+	string s = num.substr(num.size() - k, num.size()) + num.substr(0, num.size() - k);
+	while (s.size() > 1 && s[0] == '0') {
+		s = s.substr(1);
+	}
+	double snum = 1.0*stoi(s) / stoi(num);
+	printf("%.2lf",snum);
+}
+//没撒好讲的，substr提取后计算
