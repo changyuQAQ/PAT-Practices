@@ -1,0 +1,34 @@
+
+bool check(int a)
+{
+	if (a < 2)return false;
+	for (int i = 2; i*i <= a; i++)
+	{
+		if (a % i == 0)return false;
+	}
+	return true;
+}
+int main()
+{
+	int num; cin >> num;
+	if (check(num)&&check(num-6))
+	{
+		cout << "Yes"<<endl << num - 6;
+	}
+	else if (check(num) && check(num + 6))
+	{
+		cout << "Yes"<<endl << num + 6;
+	}
+	else
+	{
+		cout << "No"<<endl;
+		for (int i = num+1;  ; i++)
+		{
+			if (check(i) && check(i+6))
+			{
+				cout << i; return 0;
+			}
+		}
+	}
+}
+//定义check函数判断素数，if分支判断减6或加6的性感素数
