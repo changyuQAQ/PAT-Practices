@@ -1,0 +1,72 @@
+typedef long long LL;
+int n_val, t, s, L; int pow101[10];
+vector<pair<int, LL>>v1; vector<int>maxLsum;
+bool check(int x) {
+	if (x <= 2) return false;
+	for (int i = 2; i <= sqrt(x); ++i)
+		if (x % i == 0) return false;
+	return true;
+}
+
+void dfs(int pos, int cursum, LL facnum)
+{
+	if (pos == L && cursum == s)
+	{
+		LL A = facnum * pow101[t] + pow101[t] - 1;
+		v1.emplace_back(n_val, A); return;
+	}
+	if (cursum > s)return;
+	if (cursum + maxLsum[pos] < s)return;
+	int star = (pos == 0) ? 1 : 0;
+	int end = (pos == L - 1) ? 8 : 9;
+	for (int i = star; i <= end; i++)
+	{
+		dfs(pos + 1, cursum + i, facnum * 10 + i);
+	}
+}
+
+int main()
+{
+	pow101[0] = 1;
+	for (int i = 1; i < 10; i++)pow101[i] = pow101[i - 1] * 10;
+	int n1; cin >> n1;
+	int k, m;
+	for (int i = 0; i < n1; i++)
+	{
+		cin >> k >> m; v1.clear();
+		cout << "Case " << i + 1 << endl;
+		if (m > 9 * k || m < 1)
+		{
+			cout << "No Solution" << endl;
+			continue;
+		}
+		for (t = 1; t <= k - 1; t++)
+		{
+			n_val = m - 9 * t + 1;
+			if (n_val < 1)continue;
+			int g = gcd(n_val, m);
+			if (!check(g) || g <= 2)continue;
+
+			L = k - t; s = m - 9 * t;
+			if (s < 1 || s > 9 * L) continue;
+
+			maxLsum.assign(L + 1, 0);
+			for (int j = L - 1; j >= 0; j--)
+			{
+				int maxnum = (j == L - 1) ? 8 : 9;
+				maxLsum[j] = maxnum + maxLsum[j + 1];
+			}
+			dfs(0, 0, 0);
+		}
+		if (v1.empty()) {
+			cout << "No Solution\n";
+		}
+		else {
+			sort(v1.begin(), v1.end());
+			for (auto& p : v1) {
+				cout << p.first << " " << p.second << "\n";
+			}
+		}
+	}
+}
+//第一次做递归，卡了很久，首先没get到题目要点，因为拥有公约数，并且还要为大于2的素数，所以结尾一定要有9
