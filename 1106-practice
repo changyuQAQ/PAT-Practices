@@ -1,0 +1,15 @@
+using namespace std;
+int main() {
+    int num;
+    cin >> num;
+    string s = "2019";
+    for (int i = 0; i < num - 4; i++) {
+        int sum = 0;
+        for (int j = i; j < i + 4; j++) {
+            sum += s[j] - '0';
+        }
+        s += to_string(sum % 10);
+    }
+    cout << s.substr(0, num);
+}
+//-'0'快速计算取值
