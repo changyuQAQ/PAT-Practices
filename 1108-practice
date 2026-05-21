@@ -1,0 +1,30 @@
+int main()
+{
+	string str = " String";
+	int cc[7] = { 0 };
+	string s; cin >> s;
+	for (int i = 0; i <s.size() ; i++)
+	{
+		if (s[i] == 'S')cc[1]++;
+		if (s[i] == 't')cc[2]++;
+		if (s[i] == 'r')cc[3]++;
+		if (s[i] == 'i')cc[4]++;
+		if (s[i] == 'n')cc[5]++;
+		if (s[i] == 'g')cc[6]++;
+	}
+	//int dex = accumulate(cc,cc+7,0);
+	while (1)
+	{
+		bool printed = false;
+		for ( int i = 1; i <= 6; i++)
+		{
+			if (cc[i])
+			{
+				cout << str[i], cc[i]--;
+				printed = true;
+			}
+		}
+		if (!printed)break;
+	}
+}
+//可以使用accumulate进行循环，或者输出进行标记
