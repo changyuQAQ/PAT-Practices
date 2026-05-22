@@ -1,0 +1,40 @@
+struct test
+{
+	int date; int next;
+}t1;
+int main()
+{
+	int ad, n, k; cin >> ad >> n >> k;
+	map<int, test>m1;
+	for (int i = 0; i < n; i++)
+	{
+		int a, b, c; cin >> a >> b >> c;
+		m1[a].date = b; m1[a].next = c;
+	}
+	vector<int>re;
+	int p = ad;
+	vector<int> l1;
+	while (p != -1) {
+		l1.push_back(p);
+		p = m1[p].next;
+	}
+	int pos = l1.size();
+	int last = pos - (pos % k);
+	for (int i = last; i < pos; i++)
+	{
+		re.push_back(l1[i]);
+	}
+	for (int i = last-k; i >=0; i-=k)
+	{
+		for (int j = i; j < i+k; j++)
+		{
+			re.push_back(l1[j]);
+		}
+	}
+	for (int i = 0; i < re.size(); i++)
+	{
+		if (i != re.size() - 1) printf("%05d %d %05d\n", re[i], m1[re[i]].date, re[i + 1]);
+		else printf("%05d %d -1", re[i], m1[re[i]].date);
+	}
+}
+//map排序链表，最后再反转新排序，最后输出
