@@ -1,0 +1,33 @@
+int main() {
+    vector<string> mo = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    
+    int n;
+    cin >> n;
+    
+    for (int i = 0; i < n; i++) {
+        string mon;
+        int day, year;
+        char comma;
+        
+        cin >> mon >> day >> comma >> year;
+        
+        int tmon = find(mo.begin(), mo.end(), mon) - mo.begin() + 1;
+        
+        string year_str = to_string(year);
+        while (year_str.size() < 4) year_str = "0" + year_str;
+        
+        string mon_str = (tmon < 10) ? "0" + to_string(tmon) : to_string(tmon);
+        string day_str = (day < 10) ? "0" + to_string(day) : to_string(day);
+        
+        string date_str = year_str + mon_str + day_str;
+        
+        string rev_str = date_str;
+        reverse(rev_str.begin(), rev_str.end());
+        
+        cout << (date_str == rev_str ? "Y " : "N ") << date_str << endl;
+    }
+    
+    return 0;
+}
+//使用迭代器获取月份值，用字符去除输入的无关符号，最后反转比较回文数
