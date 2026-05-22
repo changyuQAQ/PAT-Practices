@@ -1,0 +1,41 @@
+int ctonum(char c)
+{
+	if (c <= 'z' && c >= 'a')
+		return c - 'a' + 10;
+	else return c - '0';
+}
+char numtoc(int a)
+{
+	if (a < 10)
+		return a + '0';
+	else
+		return   'a' + (a - 10);
+}
+string base30(string s1, string s2)
+{
+	int i = s1.size() - 1;
+	int j = s2.size() - 1;
+	int carry = 0;
+	string re;
+	while (i >= 0 || j >= 0)
+	{
+		int ci = (i >= 0) ? ctonum(s1[i]) : 0;
+		int cj = (j >= 0) ? ctonum(s2[j]) : 0;
+		int sum = ci + cj+carry;
+		int digit = sum % 30;    // 当前位
+        carry = sum / 30;        // 进位
+        re += numtoc(digit);     // 存当前位
+		i--; j--;
+	}
+    if (carry) re += numtoc(carry);
+    while (re.size() > 1 && re.back() == '0') re.pop_back();
+    reverse(re.begin(), re.end());
+    return re;
+}
+int main()
+{
+	string s1, s2;
+	cin >> s1 >> s2;
+	cout << base30(s1, s2);
+}
+//预设字符数字转换函数，尾加之后反转
