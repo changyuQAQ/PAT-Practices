@@ -1,0 +1,39 @@
+int main() {
+	string letter[26][7];
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < 7; j++) {
+			cin >> letter[i][j];
+		}
+	}
+	cin.ignore();
+	vector<string>v1(10005); int index = 1;
+	string s1; getline(cin, s1);
+	for (int i = 0; i < s1.size(); i++)
+	{
+		if (s1[i] >= 'A' && s1[i] <= 'Z')
+		{
+			v1[index - 1] += s1[i];
+		}
+		else
+		{
+			index++;
+		}
+	}
+	bool f1 = false;
+	for (int i = 0; i < index; i++)
+	{
+		if (v1[i].empty())continue;
+		if (f1)cout << endl;
+		for (int k = 0; k < 7; k++)
+		{
+			for (int j = 0; j < v1[i].size(); j++)
+			{
+				cout << letter[v1[i][j] - 'A'][k];
+				if (j != v1[i].size() - 1)cout << " ";
+			}
+			cout << endl;
+			f1 = true;
+		}
+	}
+}
+//没撒讲的
