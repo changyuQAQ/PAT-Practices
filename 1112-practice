@@ -1,0 +1,22 @@
+int main()
+{
+	int n,k; cin >> n>>k; int ma = -1;
+	int index = 0;
+	vector<int>vnum;
+	for (int i = 0; i < n; i++)
+	{
+		int num; cin >> num;
+		vnum.push_back(num);
+		ma = max(ma, num);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		while (i < n && vnum[i] <= k) i++;
+		if (i >= n)break;
+		int star = i;
+		while (i<n && vnum[i]>k)	i++,index++;
+		printf("[%d, %d]\n", star, i - 1);
+	}
+	if (!index)cout << ma;
+}
+//双指针跳过小于阈值的区间，输出大于阈值的区间，index统计是否存在大于区间
