@@ -1,0 +1,23 @@
+bool check(int a)
+{
+	if (a < 2)return false;
+	for (int i = 2; i*i <= a; i++)
+	{
+		if (a % i == 0)return false;
+	}
+	return true;
+}
+int main()
+{
+	string s; cin >>s; 
+	bool f1 = false;
+	for (int i = 0; i < s.size(); i++)
+	{
+		string snum = s.substr(i, s.size() - i);
+		cout << snum << " ";
+		if (check(stoi(snum)))cout << "Yes" << endl;
+		else cout << "No" << endl, f1 = true;
+	}
+	if (!f1)cout << "All Prime!";
+}
+//输入量很小，直接substr加stoi即可
