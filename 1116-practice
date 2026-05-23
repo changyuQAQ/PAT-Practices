@@ -1,0 +1,38 @@
+bool check(string s1,string s2)
+{
+	string re = "";
+	int i = s1.size() - 1; int j = s2.size() - 1;
+	int borrow = 0;
+	while (i >= 0 || j >= 0)
+	{
+		int inum = (i >= 0) ? s1[i] - '0' : 0;
+		int jnum = (j >= 0) ? s2[j] - '0' : 0;
+		int sum = jnum - inum - borrow;
+		if (sum < 0)
+		{
+			sum += 10;
+			borrow = 1;
+		}
+		else borrow = 0;
+		re.push_back(sum + '0');
+		i--; j--;
+	}
+	while (re.size() - 1 && re.back() == '0')re.pop_back();
+	if (re == "2")return true;
+	else return false;
+}
+int main()
+{
+	string s; cin >> s;
+	if (s.size() & 1)
+	{
+		printf("Error: %d digit(s)", s.size());
+		return 0;
+	}
+	int t = s.size() / 2;
+	string num1 = s.substr(0, t);
+	string num2 = s.substr(t);
+	if (check(num1, num2))cout << "Yes: " << num2 << " - " << num1 << " = 2" << endl;
+	else cout << "No: " << num2 << " - " << num1 << " != 2" << endl;
+}
+//定义check判断是否满足相减为2
