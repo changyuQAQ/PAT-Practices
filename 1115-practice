@@ -1,0 +1,63 @@
+const int MAXV = 200005; // 数字最大范围 1e5，差值也在此范围
+
+bool hasNum[MAXV];   // 数字是否出现过
+bool hasDiff[MAXV];  // 差值是否出现过
+vector<int> nums;    // 历史数字列表
+
+int main() {
+    int num1, num2;
+    cin >> num1 >> num2;
+    int n, m;
+    cin >> n >> m;
+    
+    vector<vector<int>> a(n, vector<int>(m));
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
+        }
+    }
+    
+    // 初始化
+    hasNum[num1] = hasNum[num2] = true;
+    nums.push_back(num1);
+    nums.push_back(num2);
+    int diff = abs(num1 - num2);
+    hasDiff[diff] = true;
+    
+    vector<bool> out(n, false);
+    int outCount = 0;
+    
+    for (int round = 0; round < m; round++) {
+        for (int i = 0; i < n; i++) {
+            if (out[i]) continue;
+            
+            int x = a[i][round];
+            // 判断合法性
+            if (hasNum[x] || !hasDiff[x]) {
+                out[i] = true;
+                outCount++;
+                printf("Round #%d: %d is out.\n", round + 1, i + 1);
+            } else {
+                // 合法：加入数字，更新差值和历史
+                hasNum[x] = true;
+                // 生成新差值：x 与所有历史数字的差的绝对值
+                for (int y : nums) {
+                    int d = abs(x - y);
+                    hasDiff[d] = true;
+                }
+                nums.push_back(x);
+            }
+        }
+    }
+    
+    if (outCount == n) {
+        cout << "No winner.";
+    } else {
+        cout << "Winner(s):";
+        for (int i = 0; i < n; i++) {
+            if (!out[i]) cout << " " << i + 1;
+        }
+    }
+    return 0;
+}
+//最开始使用的map储存和循环遍历标记差值导致运行超时，使用bool标记减少运行时间
