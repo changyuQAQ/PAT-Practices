@@ -1,0 +1,63 @@
+int main() {
+    string line;
+    string phone;
+
+    for (int i = 0; i < 11; i++) {
+        cin >> line;
+        int ans = 0;
+
+        if (isdigit(line[0])) {
+            // 找运算符位置
+            int opPos = -1;
+            char op ;
+            for (size_t j = 0; j < line.size(); ++j) {
+                char c = line[j];
+                if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^') {
+                    opPos = j;
+                    op = c;
+                    break;
+                }
+            }
+
+            // 如果没找到运算符（例如纯数字），直接转整数
+            if (opPos == -1) {
+                ans = stoi(line);
+            } else {
+                int left = stoi(line.substr(0, opPos));
+                int right = stoi(line.substr(opPos + 1));
+                switch (op) {
+                    case '+': ans = left + right; break;
+                    case '-': ans = left - right; break;
+                    case '*': ans = left * right; break;
+                    case '/': ans = left / right; break;
+                    case '%': ans = left % right; break;
+                    case '^': ans = pow(left, right); break;
+                }
+            }
+        } 
+        else {
+            // 字母开头：sqrt 或拼音
+            if (line.substr(0, 4) == "sqrt") {
+                int num = stoi(line.substr(4));
+                ans = sqrt(num);
+            } else {
+                // 拼音映射
+                if (line == "ling") ans = 0;
+                else if (line == "yi") ans = 1;
+                else if (line == "er") ans = 2;
+                else if (line == "san") ans = 3;
+                else if (line == "si") ans = 4;
+                else if (line == "wu") ans = 5;
+                else if (line == "liu") ans = 6;
+                else if (line == "qi") ans = 7;
+                else if (line == "ba") ans = 8;
+                else if (line == "jiu") ans = 9;
+            }
+        }
+
+        phone += to_string(ans);
+    }
+
+    cout << phone << endl;=
+}
+//字符串使用if，运算符号使用case
