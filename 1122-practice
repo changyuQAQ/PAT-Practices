@@ -1,0 +1,33 @@
+
+int main()
+{
+	int n; cin >> n; map<int, int>m1;
+	for (int i = 0; i < n; i++)
+	{
+		int num; cin >> num; 
+	    if(num&1)m1[num]++;
+	}
+	for (auto i:m1 )
+	{
+		if (i.second & 1)
+		{
+			cout << i.first; return 0;
+		}
+	}
+}
+//根据题目只有一个奇数有奇数次，直接输出
+
+int main() {
+	int n;
+	cin >> n;
+	int ans = 0;
+	for (int i = 0; i < n; i++) {
+		int x;
+		cin >> x;
+		if (x % 2 == 1) {   // 只处理奇数
+			ans ^= x;
+		}
+	}
+	cout << ans << endl;
+}
+//因为只有一个奇数有奇数次，所有其他奇数可以通过异或消除
