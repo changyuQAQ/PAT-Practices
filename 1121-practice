@@ -1,0 +1,24 @@
+bool check(string &s) {
+    for (int len = 1; len <= s.length(); ++len) {
+        string posnum = s.substr(0, len);
+        int num = stoi(posnum);
+        if (num % len != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+int main() {
+    int K;
+    cin >> K;
+    for (int i = 0; i < K; ++i) {
+        string num;
+        cin >> num;
+        if (check(num)) {
+            cout << "Yes\n";
+        } else {
+            cout << "No\n";
+        }
+    }
+}
+//使用substr截取计算
